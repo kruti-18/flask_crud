@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Students</h1>
+    <a class="addbtn" href="{{ url_for('create') }}">Add New User</a>
+    <table>
+        <tr>
+            <th>ID</th><th>Name</th><th>Email</th><th>Actions</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                <a href="{{ url_for('update', user_id=user.id) }}">Edit</a> |
+                <a href="{{ url_for('delete', user_id=user.id) }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}    
+    </table>
+</body>
+</html>
