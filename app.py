@@ -14,7 +14,10 @@ def create():
         name = request.form['name']
         email = request.form['email']
         users.append({'id': len(users) + 1, 'name': name, 'email': email})
+        # return to '/' after submitting the form directly
         return redirect(url_for('index'))
+    
+    # if user goes to /create - get method
     return render_template('create.html')
 
 @app.route('/update/<int:user_id>', methods=['GET', 'POST'])
@@ -33,11 +36,14 @@ def update(user_id):
         user['name'] = request.form['name']
         user['email'] = request.form['email']
         return redirect(url_for('index'))
+    
+    # method = GET
     return render_template('update.html', user=user)
 
 @app.route('/delete/<int:user_id>')
 def delete(user_id):
     global users
+    # filter users list
     users = [u for u in users if u['id'] != user_id] 
     return redirect(url_for('index'))
 
